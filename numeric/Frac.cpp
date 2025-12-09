@@ -1,4 +1,3 @@
-// ------------------------- Frac -------------------------
 template<class T>
 struct Frac {
     T num;

@@ -1,0 +1,15 @@
+<snippet>
+  <content><![CDATA[
+std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+
+template<typename T>
+T randint(T l, T r) {
+    return std::uniform_int_distribution<T>(l, r)(rng);
+}
+
+]]></content>
+  <tabTrigger>random</tabTrigger>
+  <description>random</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

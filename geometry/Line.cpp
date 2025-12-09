@@ -48,4 +48,3 @@ bool pointOnSegment(const Point<T> &p, const Line<T> &l) {
         && std::min(l.a.x, l.b.x) <= p.x && p.x <= std::max(l.a.x, l.b.x)
         && std::min(l.a.y, l.b.y) <= p.y && p.y <= std::max(l.a.y, l.b.y);
 }
-

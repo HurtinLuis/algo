@@ -1,30 +1,27 @@
 struct DSU {
     std::vector<int> f, siz;
 
-    DSU(int n = 0) {
-        f.resize(n);
+    DSU(int n) : f(n), siz(n, 1) {
         std::iota(f.begin(), f.end(), 0);
-        siz.assign(n, 1);
     }
 
-    int root(int u) {
-        if (u == f[u]) {
-            return u;
+    int find(int x) {
+        while (x != f[x]) {
+            x = f[x] = f[f[x]];
         }
-        return f[u] = root(f[u]);
+        return x;
     }
 
-    bool merge(int u, int v) {
-        u = root(u), v = root(v);
-        if (u == v) {
+    bool merge(int x, int y) {
+        x = find(x), y = find(y);
+        if (x == y) {
             return false;
         }
-        f[v] = u;
-        siz[u] += siz[v];
+        f[y] = x;
+        siz[x] += siz[y];
         return true;
     }
 
-    bool same(int u, int v) { return root(u) == root(v); }
-    int size(int u) { return siz[root(u)]; }
+    bool same(int x, int y) { return find(x) == find(y); }
+    int size(int x) { return siz[find(x)]; }
 };
-

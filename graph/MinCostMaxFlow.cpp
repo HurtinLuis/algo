@@ -1,4 +1,3 @@
-// ------------------------- MinCostMaxFlow -------------------------
 template<class T>
 struct MinCostMaxFlow {
     struct _Edge {

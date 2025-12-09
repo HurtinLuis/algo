@@ -118,4 +118,3 @@ struct HLD {
         return lca(a, b) ^ lca(b, c) ^ lca(c, a);
     }
 };
-

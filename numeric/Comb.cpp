@@ -1,17 +1,18 @@
-std::vector<Z> F(1, 1);
-std::vector<Z> iF(1, 1);
+std::vector<Z> fact, ifact;
 
-Z factorial(int n) {
-    while ((int) F.size() < n + 1) {
-        F.push_back(F.back() * (int) F.size());
-        iF.push_back(1 / F.back());
-    }
-    return F[n];
+Z comb(int n, int k) {
+    if(k < 0 || k > n) return 0;
+    return fact[n] * ifact[k] * ifact[n-k];
 }
 
-Z C(int n, int m) {
-    if (n < m || m < 0) {
-        return 0;
+void init(int n = 1E6 + 10) {
+    fact.resize(n), ifact.resize(n);
+    fact[0] = 1;
+    for (int i = 1; i < n; i++) {
+        fact[i] = i * fact[i - 1];
     }
-    return factorial(n) * iF[m] * iF[n - m];
+    ifact.back() = 1 / fact.back();
+    for(int i = n - 1; i > 0; i--) {
+        ifact[i - 1] = i * ifact[i];
+    }
 }

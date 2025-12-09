@@ -1,12 +1,10 @@
 template <typename T, typename F>
-class SparseTable {
-public:
+struct SparseTable {
     int n;
     std::vector<std::vector<T>> st;
     F fun;
 
-    SparseTable(const std::vector<T> &a, const F &f) : fun(f) {
-        n = int(a.size());
+    SparseTable(const std::vector<T> &a, const F &f) : n(a.size()), fun(f) {
         int h = std::__lg(n) + 1;
         st.assign(n, std::vector<T>(h));
 
@@ -20,12 +18,13 @@ public:
         }
     }
 
-    T query(int l, int r) const {
+    T query(int l, int r) {
         assert(0 <= l && l <= r && r <= n - 1);
         int k = std::__lg(r - l + 1);
         return fun(st[l][k], st[r - (1 << k) + 1][k]);
     }
 };
+
 
 // Example:
 // SparseTable st(a, [](int u, int v) { return std::max(u, v); });

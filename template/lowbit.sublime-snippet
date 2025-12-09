@@ -1,0 +1,11 @@
+<snippet>
+  <content><![CDATA[
+// [0, 1, 2, 3, 4] -> [-1, 0, 1, 1, 2]
+int topbit(int x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }
+int topbit(i64 x) { return (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
+]]></content>
+  <tabTrigger>topbit</tabTrigger>
+  <description>topbit</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

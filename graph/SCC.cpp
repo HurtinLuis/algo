@@ -1,3 +1,4 @@
+// ------------------------- SCC -------------------------
 struct SCC {
     int n;
     std::vector<std::vector<int>> adj;

@@ -1,0 +1,10 @@
+<snippet>
+  <content><![CDATA[
+int parity(int x) { return __builtin_parity(x); }
+int parity(i64 x) { return __builtin_parityll(x); }
+]]></content>
+  <tabTrigger>parity</tabTrigger>
+  <description>parity</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

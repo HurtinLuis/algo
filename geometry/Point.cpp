@@ -3,9 +3,12 @@ template <typename T>
 struct Point {
     T x;
     T y;
-    Point(T x = 0, T y = 0) : x(x), y(y) {}
+    Point(T x_ = 0, T y_ = 0) : x(x_), y(y_) {}
 
-    template<class U> operator Point<U>() { return Point<U> (U(x), U(y)); }
+    template<typename U>
+    operator Point<U>() {
+        return Point<U> (U(x), U(y));
+    }
 
     Point &operator+=(const Point &p) & {
         x += p.x;
@@ -71,4 +74,3 @@ template<class T> double distance(const Point<T> &a, const Point<T> &b) { return
 template<class T> Point<T> rotate(const Point<T> &a) { return Point(-a.y, a.x); }
 
 template<class T> int sgn(const Point<T> &a) { return a.y > 0 || (a.y == 0 && a.x > 0) ? 1 : -1; }
-

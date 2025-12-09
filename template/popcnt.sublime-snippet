@@ -1,0 +1,10 @@
+<snippet>
+  <content><![CDATA[
+int popcnt(int x) { return __builtin_popcount(x); }
+int popcnt(i64 x) { return __builtin_popcountll(x); }
+]]></content>
+  <tabTrigger>popcnt</tabTrigger>
+  <description>popcnt</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

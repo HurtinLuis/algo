@@ -1,5 +1,5 @@
 Z det(std::vector<std::vector<Z>> a) {
-    int n = int(a.size());
+    int n = a.size();
     Z ans = 1;
     for (int i = 0; i < n; i++) {
         int j = i;
@@ -11,7 +11,6 @@ Z det(std::vector<std::vector<Z>> a) {
             std::swap(a[i], a[j]);
             ans *= -1;
         }
-
         Z inv = a[i][i].inv();
         for (int j = i + 1; j < n; j++) {
             Z v = a[j][i] * inv;

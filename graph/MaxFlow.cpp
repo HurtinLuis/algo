@@ -1,4 +1,3 @@
-// ------------------------- MaxFlow -------------------------
 template<class T>
 struct MaxFlow {
     struct Edge {

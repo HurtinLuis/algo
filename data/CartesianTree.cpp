@@ -1,5 +1,5 @@
 // ------------------------- Cartesian Tree -------------------------
-template <typename T, bool IS_MIN>
+template <typename T, bool is_min>
 struct CartesianTree {
     int n;
     std::vector<T> a;
@@ -19,7 +19,7 @@ struct CartesianTree {
         }
 
         auto is_sm = [&](int i, int j) -> bool {
-            return IS_MIN ?
+            return is_min ?
                 (a[i] < a[j]) || (a[i] == a[j] && i < j) :
                 (a[i] > a[j]) || (a[i] == a[j] && i < j);
         };
@@ -55,7 +55,7 @@ struct CartesianTree {
     }
 
     T maxArea() {
-        assert(IS_MIN);
+        assert(is_min);
         T res = 0;
         for (int i = 0; i < n; i++) {
             auto [l, r, h] = maxRectangle(i);
