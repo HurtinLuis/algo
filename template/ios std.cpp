@@ -18,7 +18,7 @@ template<typename T> void chmax(T& a, const T b) { if (a < b) a = b; }
 using namespace std;
 
 void solve() {
-
+    
 }
 
 signed main() {

@@ -10,7 +10,7 @@ struct SegmentTree {
         info.assign(4 << std::__lg(n), v);
         tag.assign(4 << std::__lg(n), Tag());
     }
-    
+
     void pull(int p) {
         info[p] = info[2 * p] + info[2 * p + 1];
     }

@@ -25,6 +25,5 @@ struct SparseTable {
     }
 };
 
-
 // Example:
 // SparseTable st(a, [](int u, int v) { return std::max(u, v); });

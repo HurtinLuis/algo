@@ -23,5 +23,6 @@ struct DSU {
     }
 
     bool same(int x, int y) { return find(x) == find(y); }
+
     int size(int x) { return siz[find(x)]; }
 };

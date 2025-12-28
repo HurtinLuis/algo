@@ -1,18 +1,18 @@
 // author: tourist
-// modified by: Hurtin (2025/11/20)
+// modified by: Hurtin (2025/12/26)
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <bitset>
+#include <queue>
+#include <deque>
 #include <tuple>
 #include <utility>
 
-namespace std {
+namespace std { // then I can use std::to_string yeah
 
-string to_string(const string& s) { return '"' + s + '"'; }
-
-string to_string(const char* s) { return to_string((string) s); }
+string to_string(string s) { return '"' + s + '"'; }
 
 string to_string(char s) { return string(1, s); }
 
@@ -38,6 +38,54 @@ string to_string(bitset<N> v) {
     for (size_t i = 0; i < N; i++) {
         res += char('0' + v[i]);
     }
+    return res;
+}
+
+template <typename T>
+string to_string(queue<T> q) {
+    bool first = true;
+    string res = "{";
+    while (!q.empty()) {
+        if (!first) {
+            res += ", ";
+        }
+        first = false;
+        res += to_string(q.front());
+        q.pop();
+    }
+    res += "}";
+    return res;
+}
+
+template <typename T>
+string to_string(deque<T> q) {
+    bool first = true;
+    string res = "{";
+    while (!q.empty()) {
+        if (!first) {
+            res += ", ";
+        }
+        first = false;
+        res += to_string(q.front());
+        q.pop_front();
+    }
+    res += "}";
+    return res;
+}
+
+template <typename T, typename Container, typename Compare>
+string to_string(priority_queue<T, Container, Compare> pq) {
+    bool first = true;
+    string res = "{";
+    while (!pq.empty()) {
+        if (!first) {
+            res += ", ";
+        }
+        first = false;
+        res += to_string(pq.top());
+        pq.pop();
+    }
+    res += "}";
     return res;
 }
 
