@@ -1,5 +1,4 @@
-// ------------------------- Modular -------------------------
-template<typename T>
+template <class T>
 T power(T a, i64 b) {
     T res = 1;
     while (b) {
@@ -10,7 +9,7 @@ T power(T a, i64 b) {
     return res;
 }
 
-template<i64 M>
+template <i64 M>
 struct Modular {
     i64 x;
     Modular() : x(0) {}
@@ -28,10 +27,10 @@ struct Modular {
     explicit operator i64() const {
         return x;
     }
+    
     Modular inv() const {
         return power(Modular(x), M - 2);
     }
-
     Modular operator-() const {
         Modular res;
         res.x = normalize(-x);
@@ -65,14 +64,12 @@ struct Modular {
     friend Modular operator/(Modular lhs, const Modular& rhs) {
         return lhs /= rhs;
     }
-
     friend bool operator==(const Modular& lhs, const Modular& rhs) {
         return lhs.x == rhs.x;
     }
     friend bool operator!=(const Modular& lhs, const Modular& rhs) {
         return lhs.x != rhs.x;
     }
-
     friend std::istream& operator>>(std::istream& is, Modular& a) {
         i64 v;
         is >> v;

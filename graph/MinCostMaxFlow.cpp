@@ -1,4 +1,4 @@
-template<class T>
+template <class T>
 struct MinCostMaxFlow {
     struct _Edge {
         int to;
@@ -39,15 +39,7 @@ struct MinCostMaxFlow {
         return dis[t] != std::numeric_limits<T>::max();
     }
 
-    MinCostMaxFlow(int n_ = 0) {
-        init(n_);
-    }
-
-    void init(int n_) {
-        n = n_;
-        e.clear();
-        g.assign(n, {});
-    }
+    MinCostMaxFlow(int n) : n(n), g(n) {}
 
     void addEdge(int u, int v, T cap, T cost) {
         g[u].push_back(e.size());

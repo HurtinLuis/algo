@@ -1,4 +1,4 @@
-template <typename T>
+template <class T>
 T floorDiv(T x, T y) {
     assert(y != 0);
     if (y < 0) {
@@ -9,7 +9,7 @@ T floorDiv(T x, T y) {
     return (x + 1) / y - 1;
 }
 
-template <typename T>
+template <class T>
 T ceilDiv(T x, T y) {
     assert(y != 0);
     if (y < 0) {

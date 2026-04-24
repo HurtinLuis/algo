@@ -1,17 +1,14 @@
-template<class T>
+template <class T>
 struct Frac {
-    T num;
-    T den;
-    Frac(T num_, T den_) : num(num_), den(den_) {
+    T num, den;
+    Frac(T x = 0, T y = 1) : num(x), den(y) {
         if (den < 0) {
             den = -den;
             num = -num;
         }
     }
-    Frac() : Frac(0, 1) {}
-    Frac(T num_) : Frac(num_, 1) {}
     explicit operator double() const {
-        return 1. * num / den;
+        return 1.0 * num / den;
     }
     Frac &operator+=(const Frac &rhs) {
         num = num * rhs.den + rhs.num * den;

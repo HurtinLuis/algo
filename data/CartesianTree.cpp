@@ -1,66 +1,14 @@
-// ------------------------- Cartesian Tree -------------------------
-template <typename T, bool is_min>
-struct CartesianTree {
-    int n;
-    std::vector<T> a;
-    std::vector<std::pair<int, int>> range;
-    std::vector<int> lch, rch, par;
-    int root;
-
-    CartesianTree(std::vector<T> &a_) : n((int) a_.size()), a(a_) {
-        range.assign(n, {-1, -1});
-        lch.assign(n, -1);
-        rch.assign(n, -1);
-        par.assign(n, -1);
-        if (n == 1) {
-            range[0] = {0, 1};
-            root = 0;
-            return;
+template <class T>
+auto CartesianTree(const vector<T> &as, int gr = 0) {
+    int n = as.size();
+    vector<int> ls(n, -1), rs(n, -1), stk;
+    for (int i = 0; i < n; ++i) {
+        while (!stk.empty() && ((as[i] < as[stk.back()]) ^ gr)) {
+            ls[i] = stk.back();
+            stk.pop_back();
         }
-
-        auto is_sm = [&](int i, int j) -> bool {
-            return is_min ?
-                (a[i] < a[j]) || (a[i] == a[j] && i < j) :
-                (a[i] > a[j]) || (a[i] == a[j] && i < j);
-        };
-
-        std::vector<int> stk;
-        for (int i = 0; i < n; i++) {
-            while (!stk.empty() && is_sm(i, stk.back())) {
-                lch[i] = stk.back();
-                stk.pop_back();
-            }
-            range[i].first = (stk.empty() ? 0 : stk.back() + 1);
-            stk.push_back(i);
-        }
-
-        stk.clear();
-        for (int i = n - 1; ~i; i--) {
-            while (!stk.empty() && is_sm(i, stk.back())) {
-                rch[i] = stk.back();
-                stk.pop_back();
-            }
-            range[i].second = (stk.empty() ? n : stk.back());
-            stk.push_back(i);
-        }
-
-        for (int i = 0; i < n; i++) if (lch[i] != -1) par[lch[i]] = i;
-        for (int i = 0; i < n; i++) if (rch[i] != -1) par[rch[i]] = i;
-        for (int i = 0; i < n; i++) if (par[i] == -1) root = i;
+        if (!stk.empty()) rs[stk.back()] = i;
+        stk.push_back(i);
     }
-
-    std::tuple<int, int, T> maxRectangle(int i) {
-        auto [l, r] = range[i];
-        return {l, r, a[i]};
-    }
-
-    T maxArea() {
-        assert(is_min);
-        T res = 0;
-        for (int i = 0; i < n; i++) {
-            auto [l, r, h] = maxRectangle(i);
-            res = std::max(res, (r - l) * h);
-        }
-        return res;
-    }
-};
+    return make_tuple(stk[0], ls, rs);
+}

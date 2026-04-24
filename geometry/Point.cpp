@@ -1,14 +1,8 @@
-// ----------------------------- Point -----------------------------
-template <typename T>
+template <class T>
 struct Point {
     T x;
     T y;
-    Point(T x_ = 0, T y_ = 0) : x(x_), y(y_) {}
-
-    template<typename U>
-    operator Point<U>() {
-        return Point<U> (U(x), U(y));
-    }
+    Point(T x = 0, T y = 0) : x(x), y(y) {}
 
     Point &operator+=(const Point &p) & {
         x += p.x;
@@ -59,18 +53,18 @@ struct Point {
     }
 };
 
-template<class T> T dot(const Point<T> &a, const Point<T> &b) { return a.x * b.x + a.y * b.y; }
+template <class T> T dot(const Point<T> &a, const Point<T> &b) { return a.x * b.x + a.y * b.y; }
 
-template<class T> T cross(const Point<T> &a, const Point<T> &b) { return a.x * b.y - a.y * b.x; }
+template <class T> T cross(const Point<T> &a, const Point<T> &b) { return a.x * b.y - a.y * b.x; }
 
-template<class T> T square(const Point<T> &p) { return dot(p, p); }
+template <class T> T square(const Point<T> &p) { return dot(p, p); }
 
-template<class T> double length(const Point<T> &p) { return std::sqrt(square(p)); }
+template <class T> double length(const Point<T> &p) { return std::sqrt(square(p)); }
 
-template<class T> Point<T> normalize(const Point<T> &p) { return p / length(p); }
+template <class T> Point<T> normalize(const Point<T> &p) { return p / length(p); }
 
-template<class T> double distance(const Point<T> &a, const Point<T> &b) { return length(a - b); }
+template <class T> double distance(const Point<T> &a, const Point<T> &b) { return length(a - b); }
 
-template<class T> Point<T> rotate(const Point<T> &a) { return Point(-a.y, a.x); }
+template <class T> Point<T> rotate(const Point<T> &a) { return Point(-a.y, a.x); }
 
-template<class T> int sgn(const Point<T> &a) { return a.y > 0 || (a.y == 0 && a.x > 0) ? 1 : -1; }
+template <class T> int sgn(const Point<T> &a) { return a.y > 0 || (a.y == 0 && a.x > 0) ? 1 : -1; }

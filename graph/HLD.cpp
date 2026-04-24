@@ -1,4 +1,3 @@
-// ------------------------- HLD -------------------------
 struct HLD {
     int n;
     std::vector<int> siz, top, dep, parent, in, out, ord;

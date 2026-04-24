@@ -1,4 +1,3 @@
-// ------------------------- HashMap -------------------------
 #include <ext/pb_ds/assoc_container.hpp>
 
 std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());

@@ -1,4 +1,4 @@
-template<class T>
+template <class T>
 struct MaxFlow {
     struct Edge {
         int to;
@@ -70,5 +70,13 @@ struct MaxFlow {
             ans += dfs(s, t, std::numeric_limits<T>::max());
         }
         return ans;
+    }
+
+    std::vector<int> minCut() {
+        std::vector<int> c(n);
+        for (int i = 0; i < n; i++) {
+            c[i] = (h[i] != -1);
+        }
+        return c;
     }
 };

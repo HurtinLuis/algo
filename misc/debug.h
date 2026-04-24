@@ -1,6 +1,3 @@
-// author: tourist
-// modified by: Hurtin (2025/12/26)
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -131,13 +128,13 @@ template<typename... T>
 void debug_out(const std::string &s, T&&... args) {
     using namespace std;
     string n = s;
-    size_t pos = 0;
+    int pos = 0;
     int unpack[] = {0, (
         [&]() {
-            size_t comma = n.find(',', pos);
-            string p = (comma == string::npos ? n.substr(pos) : n.substr(pos, comma - pos));
+            int comma = n.find(',', pos);
+            string p = (comma == -1 ? n.substr(pos) : n.substr(pos, comma - pos));
             cerr << color("32") << p << color("0") << ": " << to_string(forward<T>(args)) << " ";
-            pos = (comma == string::npos ? comma : comma + 1);
+            pos = (comma == -1 ? comma : comma + 1);
         }(), 0)...};
     (void)unpack;
     cerr << color("0") << endl;

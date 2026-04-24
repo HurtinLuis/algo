@@ -1,4 +1,3 @@
-// ------------------------- EBCC -------------------------
 struct EBCC {
     int n;
     std::vector<std::vector<int>> adj;

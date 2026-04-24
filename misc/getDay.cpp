@@ -20,4 +20,3 @@ int getDay(int y, int m, int d) {
     // 以 1970年1月1日（星期四）为基准（UNIX时间戳的起点）
     return (ans + 2) % 7 + 1;
 }
-

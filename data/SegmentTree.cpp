@@ -1,14 +1,31 @@
-// ------------------------- SegmentTree -------------------------
-template<class Info, class Tag>
+template <class Info, class Tag>
 struct SegmentTree {
     int n;
     std::vector<Info> info;
     std::vector<Tag> tag;
 
-    SegmentTree(int n_, Info v = Info()) {
-        n = n_;
-        info.assign(4 << std::__lg(n), v);
+    SegmentTree(int n, Info v = Info()) {
+        init(std::vector(n, v));
+    }
+    SegmentTree(std::vector<Info> a) {
+        init(a);
+    }
+
+    void init(std::vector<Info> a) {
+        n = a.size();
+        info.assign(4 << std::__lg(n), Info());
         tag.assign(4 << std::__lg(n), Tag());
+        auto build = [&](auto &&self, int p, int l, int r) {
+            if (r - l == 1) {
+                info[p] = a[l];
+                return;
+            }
+            int m = (l + r) / 2;
+            self(self, 2 * p, l, m);
+            self(self, 2 * p + 1, m, r);
+            pull(p);
+        };
+        build(build, 1, 0, n);
     }
 
     void pull(int p) {
@@ -31,8 +48,8 @@ struct SegmentTree {
             info[p] = v;
             return;
         }
-        int m = (l + r) / 2;
         push(p);
+        int m = (l + r) / 2;
         if (x < m) {
             modify(2 * p, l, m, x, v);
         } else {
@@ -52,8 +69,8 @@ struct SegmentTree {
         if (l >= x && r <= y) {
             return info[p];
         }
-        int m = (l + r) / 2;
         push(p);
+        int m = (l + r) / 2;
         return query(2 * p, l, m, x, y) + query(2 * p + 1, m, r, x, y);
     }
 
@@ -69,8 +86,8 @@ struct SegmentTree {
             apply(p, v);
             return;
         }
-        int m = (l + r) / 2;
         push(p);
+        int m = (l + r) / 2;
         rangeApply(2 * p, l, m, x, y, v);
         rangeApply(2 * p + 1, m, r, x, y, v);
         pull(p);
@@ -83,14 +100,14 @@ struct SegmentTree {
 
 struct Tag {
     int x = 0;
-    void apply(const Tag &t) & {
+    void apply(const Tag &t) {
         x = std::max(x, t.x);
     }
 };
 
 struct Info {
     int max = 0;
-    void apply(const Tag &t) & {
+    void apply(const Tag &t) {
         max = std::max(max, t.x);
     }
 };

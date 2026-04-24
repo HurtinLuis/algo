@@ -1,4 +1,4 @@
-template <typename T>
+template <class T>
 std::vector<Point<T>> getHull(std::vector<Point<T>> &a) {
     std::sort(a.begin(), a.end(), [&](auto u, auto v) {
         if (u.x != v.x) {

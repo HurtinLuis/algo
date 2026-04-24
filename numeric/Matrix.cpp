@@ -1,5 +1,4 @@
-// ------------------------- Martrix -------------------------
-template<typename T>
+template <class T>
 struct Matrix : public std::vector<std::vector<T>> {
     int n;
     Matrix(int n_ = 0, int op = 0) : n(n_) {
@@ -8,7 +7,7 @@ struct Matrix : public std::vector<std::vector<T>> {
     }
 };
 
-template<typename T>
+template <class T>
 Matrix<T> operator*(const Matrix<T> &a, const Matrix<T> &b) {
     assert(a.size() == b.size());
     int n = a.size();
@@ -23,12 +22,12 @@ Matrix<T> operator*(const Matrix<T> &a, const Matrix<T> &b) {
     return c;
 }
 
-template<typename T>
+template <class T>
 Matrix<T> &operator*=(Matrix<T> &a, const Matrix<T> &b) {
     return a = a * b;
 }
 
-template<typename T, typename U>
+template <class T, class U>
 Matrix<T> power(const Matrix<T> &a, U b) {
     int n = a.size();
     Matrix<T> res(n, 1), x = a;
@@ -40,4 +39,4 @@ Matrix<T> power(const Matrix<T> &a, U b) {
     return res;
 }
 
-using Mat = Matrix<Z>;
+using mat = Matrix<Z>;
