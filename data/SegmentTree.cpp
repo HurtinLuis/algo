@@ -75,7 +75,7 @@ struct SegmentTree {
     }
 
     Info query(int l, int r) {
-        return query(1, 0, n, l, r + 1);
+        return query(1, 0, n, l, r);
     }
 
     void rangeApply(int p, int l, int r, int x, int y, const Tag &v) {
@@ -94,7 +94,57 @@ struct SegmentTree {
     }
 
     void rangeApply(int l, int r, const Tag &v) {
-        return rangeApply(1, 0, n, l, r + 1, v);
+        return rangeApply(1, 0, n, l, r, v);
+    }
+
+    template <class F>
+    int findFirst(int p, int l, int r, int x, int y, F &&pred) {
+        if (l >= y || r <= x) {
+            return -1;
+        }
+        if (l >= x && r <= y && !pred(info[p])) {
+            return -1;
+        }
+        if (r - l == 1) {
+            return l;
+        }
+        push(p);
+        int m = (l + r) / 2;
+        int res = findFirst(2 * p, l, m, x, y, pred);
+        if (res == -1) {
+            res = findFirst(2 * p + 1, m, r, x, y, pred);
+        }
+        return res;
+    }
+
+    template <class F>
+    int findFirst(int l, int r, F &&pred) {
+        return findFirst(1, 0, n, l, r, pred);
+    }
+
+    template <class F>
+    int findLast(int p, int l, int r, int x, int y, F &&pred) {
+        if (l >= y || r <= x) {
+            return -1;
+        }
+        if (l >= x && r <= y && !pred(info[p])) {
+            return -1;
+        }
+        if (r - l == 1) {
+            return l;
+        }
+        push(p);
+        int m = (l + r) / 2;
+        int res = findLast(2 * p + 1, m, r, x, y, pred);
+        if (res == -1) {
+            res = findLast(2 * p, l, m, x, y, pred);
+        }
+        return res;
+    }
+
+    template <class F>
+    int findLast(int l, int r, F &&pred) {
+        return findLast(1, 0, n, l, r, pred);
     }
 };
 
