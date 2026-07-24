@@ -3,9 +3,9 @@ constexpr int mod = 998244353;
 struct Z {
     i64 x;
     Z(i64 y = 0) : x(y % mod) { if (x < 0) x += mod; }
-    Z operator + (const Z &o) { return Z(x + o.x); }
-    Z operator - (const Z &o) { return Z(x - o.x); }
-    Z operator * (const Z &o) { return Z(x * o.x); }
+    Z operator+(const Z &o) const { return Z(x + o.x); }
+    Z operator-(const Z &o) const { return Z(x - o.x); }
+    Z operator*(const Z &o) const { return Z(x * o.x); }
 };
 
 Z power(Z a, int b) {
